@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:meditasi_app/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Meditasi App',
-      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,110 +23,8 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
-        fontFamily: 'Cairo',
-        scaffoldBackgroundColor: kBackgroundColor,
-        textTheme: Theme.of(context).textTheme.apply(displayColor: kTextColor),
       ),
-      themeMode: ThemeMode.light,
-      home: const HomeScreen(),
-    );
-  }
-}
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    // Mendapat tinggi total perangkat dengan media query
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            height: size.height * 0.45,
-            decoration: const BoxDecoration(
-              // Container dengan tinggi 45 % total height
-              color: Color(0xfff5ceb8),
-              image: DecorationImage(
-                image: AssetImage('assets/images/undraw_pilates_gpdb.png'),
-                alignment: Alignment.centerLeft,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Material(
-                      color: Colors.white.withOpacity(0),
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(30),
-                        onTap: () {
-                          print('Tap inkwell menu');
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 52,
-                          width: 52,
-                          decoration: const BoxDecoration(
-                            color: Color(0xfff2bea1),
-                            shape: BoxShape.circle,
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/icons/menu.svg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'Good morning Sir',
-                    style: Theme.of(context)
-                        .textTheme
-                        .displaySmall
-                        ?.copyWith(fontWeight: FontWeight.w900, fontSize: 32),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 24),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(29.5),
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search here',
-                        icon: SvgPicture.asset('assets/icons/search.svg'),
-                        border: InputBorder.none,
-                        hintStyle:
-                            const TextStyle().copyWith(color: Colors.black54),
-                      ),
-                      onChanged: (stringkey) {
-                        print('$stringkey');
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
