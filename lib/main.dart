@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: <Widget>[
           Container(
-            height: size.height * 0.45,
+            height: size.height * 0.5,
             decoration: const BoxDecoration(
               // Container dengan tinggi 45 % total height
               color: Color(0xfff5ceb8),
@@ -95,14 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Text(
-                    'Good morning Sir',
+                    'Good morning \nSir',
                     style: Theme.of(context)
                         .textTheme
                         .displaySmall
                         ?.copyWith(fontWeight: FontWeight.w900, fontSize: 32),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 24),
+                    margin: const EdgeInsets.symmetric(vertical: 20),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
                       vertical: 4,
@@ -124,11 +124,102 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
+                  Expanded(
+                    child: GridView.count(
+                      childAspectRatio: 0.85,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      children: <Widget>[
+                        CategoryCard(
+                          strTitle: 'Diet Recommendaton',
+                          svgSrc: 'assets/icons/Hamburger.svg',
+                          pressCb: () {},
+                        ),
+                        CategoryCard(
+                          strTitle: 'Push up Excercises',
+                          svgSrc: 'assets/icons/Excercises.svg',
+                          pressCb: () {},
+                        ),
+                        CategoryCard(
+                          strTitle: 'Meditation',
+                          svgSrc: 'assets/icons/Meditation.svg',
+                          pressCb: () {},
+                        ),
+                        CategoryCard(
+                          strTitle: 'Yoga',
+                          svgSrc: 'assets/icons/yoga.svg',
+                          pressCb: () {},
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({
+    Key? key,
+    required this.svgSrc,
+    required this.strTitle,
+    required this.pressCb,
+  }) : super(key: key);
+
+  final String svgSrc;
+  final String strTitle;
+  final Function pressCb;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(13),
+      child: Container(
+        // padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(13),
+          boxShadow: const [
+            BoxShadow(
+              offset: Offset(0, 17),
+              blurRadius: 17,
+              spreadRadius: -23,
+              color: kShadowColor,
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              pressCb();
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                children: <Widget>[
+                  const Spacer(),
+                  SvgPicture.asset(svgSrc),
+                  const Spacer(),
+                  Text(
+                    strTitle,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontSize: 14),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
