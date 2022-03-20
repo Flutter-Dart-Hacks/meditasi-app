@@ -1,6 +1,9 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meditasi_app/constants.dart';
+import 'package:meditasi_app/widgets/categorycard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,6 +52,33 @@ class _HomeScreenState extends State<HomeScreen> {
     // Mendapat tinggi total perangkat dengan media query
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+        height: 80,
+        color: Colors.white,
+        child: Row(
+          children: <Widget>[
+            BottomNavItem(
+              strTitle: 'Today',
+              svgSrc: 'assets/icons/calendar.svg',
+              pressCb: () {},
+              isActive: false,
+            ),
+            BottomNavItem(
+              strTitle: 'All Excercises',
+              svgSrc: 'assets/icons/gym.svg',
+              pressCb: () {},
+              isActive: false,
+            ),
+            BottomNavItem(
+              strTitle: 'Settings',
+              svgSrc: 'assets/icons/settings.svg',
+              pressCb: () {},
+              isActive: false,
+            )
+          ],
+        ),
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -164,62 +194,35 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class CategoryCard extends StatelessWidget {
-  const CategoryCard({
+class BottomNavItem extends StatelessWidget {
+  const BottomNavItem({
     Key? key,
     required this.svgSrc,
     required this.strTitle,
     required this.pressCb,
+    this.isActive = false,
   }) : super(key: key);
 
   final String svgSrc;
   final String strTitle;
   final Function pressCb;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(13),
-      child: Container(
-        // padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(13),
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 17),
-              blurRadius: 17,
-              spreadRadius: -23,
-              color: kShadowColor,
-            ),
-          ],
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () {
-              pressCb();
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(18),
-              child: Column(
-                children: <Widget>[
-                  const Spacer(),
-                  SvgPicture.asset(svgSrc),
-                  const Spacer(),
-                  Text(
-                    strTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
+    return GestureDetector(
+      onTap: () {
+        pressCb();
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          SvgPicture.asset(svgSrc),
+          Text(
+            strTitle,
+            style: TextStyle(color: isActive ? kActiveIconColor : kTextColor),
           ),
-        ),
+        ],
       ),
     );
   }
