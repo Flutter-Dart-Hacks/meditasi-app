@@ -1,8 +1,8 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meditasi_app/constants.dart';
+import 'package:meditasi_app/screens/detailmenu_screen.dart';
+import 'package:meditasi_app/widgets/bottom_navbars.dart';
 import 'package:meditasi_app/widgets/categorycard.dart';
 
 void main() {
@@ -52,33 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Mendapat tinggi total perangkat dengan media query
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-        height: 80,
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            BottomNavItem(
-              strTitle: 'Today',
-              svgSrc: 'assets/icons/calendar.svg',
-              pressCb: () {},
-              isActive: false,
-            ),
-            BottomNavItem(
-              strTitle: 'All Excercises',
-              svgSrc: 'assets/icons/gym.svg',
-              pressCb: () {},
-              isActive: false,
-            ),
-            BottomNavItem(
-              strTitle: 'Settings',
-              svgSrc: 'assets/icons/settings.svg',
-              pressCb: () {},
-              isActive: false,
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar: const BottomNavbars(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -125,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Text(
-                    'Good morning \nSir',
+                    'Good morning \nUser',
                     style: Theme.of(context)
                         .textTheme
                         .displaySmall
@@ -174,7 +148,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         CategoryCard(
                           strTitle: 'Meditation',
                           svgSrc: 'assets/icons/Meditation.svg',
-                          pressCb: () {},
+                          pressCb: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const DetailMenuScreen();
+                                },
+                              ),
+                            );
+                          },
                         ),
                         CategoryCard(
                           strTitle: 'Yoga',
@@ -188,40 +171,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           )
-        ],
-      ),
-    );
-  }
-}
-
-class BottomNavItem extends StatelessWidget {
-  const BottomNavItem({
-    Key? key,
-    required this.svgSrc,
-    required this.strTitle,
-    required this.pressCb,
-    this.isActive = false,
-  }) : super(key: key);
-
-  final String svgSrc;
-  final String strTitle;
-  final Function pressCb;
-  final bool isActive;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        pressCb();
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SvgPicture.asset(svgSrc),
-          Text(
-            strTitle,
-            style: TextStyle(color: isActive ? kActiveIconColor : kTextColor),
-          ),
         ],
       ),
     );
