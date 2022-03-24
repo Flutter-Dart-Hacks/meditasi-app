@@ -69,22 +69,35 @@ class _DetailMenuScreenState extends State<DetailMenuScreen> {
                     width: size.width * 0.5,
                   ),
                   Wrap(
+                    spacing: 20,
+                    runSpacing: 10,
+                    direction: Axis.horizontal,
                     children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        child: Row(children: <Widget>[
-                          Container(
-                            height: 42,
-                            width: 43,
-                            decoration: const BoxDecoration(
-                              color: kBlueColor,
-                            ),
-                          )
-                        ]),
-                      )
+                      SessionCard(
+                        sessionNumber: 1,
+                        isDone: true,
+                        pressCallback: () {},
+                      ),
+                      SessionCard(
+                        sessionNumber: 2,
+                        isDone: false,
+                        pressCallback: () {},
+                      ),
+                      SessionCard(
+                        sessionNumber: 3,
+                        isDone: false,
+                        pressCallback: () {},
+                      ),
+                      SessionCard(
+                        sessionNumber: 4,
+                        isDone: false,
+                        pressCallback: () {},
+                      ),
+                      SessionCard(
+                        sessionNumber: 5,
+                        isDone: false,
+                        pressCallback: () {},
+                      ),
                     ],
                   )
                 ],
@@ -94,5 +107,79 @@ class _DetailMenuScreenState extends State<DetailMenuScreen> {
         ],
       ),
     );
+  }
+}
+
+class SessionCard extends StatelessWidget {
+  final int sessionNumber;
+  final bool isDone;
+  final Function pressCallback;
+  const SessionCard({
+    Key? key,
+    required this.sessionNumber,
+    this.isDone = false,
+    required this.pressCallback,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraint) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(13),
+        child: Container(
+          // Mendapatkan max width dari layout yang ada untuk widget ini
+          width: (constraint.maxWidth / 2) - 10,
+          // padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(13),
+            boxShadow: const [
+              BoxShadow(
+                offset: Offset(0, 17),
+                blurRadius: 23,
+                spreadRadius: -13,
+                color: kShadowColor,
+              )
+            ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                pressCallback();
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(children: <Widget>[
+                  Container(
+                    height: 42,
+                    width: 43,
+                    decoration: BoxDecoration(
+                      color: isDone ? kBlueColor : Colors.white,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: kBlueColor),
+                    ),
+                    child: Icon(
+                      Icons.play_arrow,
+                      color: isDone ? Colors.white : kBlueColor,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Session $sessionNumber',
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                  )
+                ]),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
   }
 }
