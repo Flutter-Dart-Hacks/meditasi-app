@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meditasi_app/constants.dart';
 import 'package:meditasi_app/widgets/searchbar.dart';
 
@@ -31,76 +32,149 @@ class _DetailMenuScreenState extends State<DetailMenuScreen> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: size.height * 0.05,
-                  ),
-                  Text(
-                    'Meditation',
-                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                          fontWeight: FontWeight.w900,
-                        ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "3-10 minute course",
-                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    width: size.width * 0.6,
-                    child: Text(
-                      descMeditation,
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                          fontSize: 15, fontWeight: FontWeight.normal),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: size.height * 0.05,
                     ),
-                  ),
-                  SizedBox(
-                    child: const SearchBar(),
-                    width: size.width * 0.5,
-                  ),
-                  Wrap(
-                    spacing: 20,
-                    runSpacing: 10,
-                    direction: Axis.horizontal,
-                    children: <Widget>[
-                      SessionCard(
-                        sessionNumber: 1,
-                        isDone: true,
-                        pressCallback: () {},
+                    Text(
+                      'Meditation',
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            fontWeight: FontWeight.w900,
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "3-10 minute course",
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: size.width * 0.6,
+                      child: Text(
+                        descMeditation,
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                            fontSize: 15, fontWeight: FontWeight.normal),
                       ),
-                      SessionCard(
-                        sessionNumber: 2,
-                        isDone: false,
-                        pressCallback: () {},
+                    ),
+                    SizedBox(
+                      child: const SearchBar(),
+                      width: size.width * 0.5,
+                    ),
+                    Wrap(
+                      spacing: 20,
+                      runSpacing: 10,
+                      direction: Axis.horizontal,
+                      children: <Widget>[
+                        SessionCard(
+                          sessionNumber: 1,
+                          isDone: true,
+                          pressCallback: () {},
+                        ),
+                        SessionCard(
+                          sessionNumber: 2,
+                          isDone: false,
+                          pressCallback: () {},
+                        ),
+                        SessionCard(
+                          sessionNumber: 3,
+                          isDone: false,
+                          pressCallback: () {},
+                        ),
+                        SessionCard(
+                          sessionNumber: 4,
+                          isDone: false,
+                          pressCallback: () {},
+                        ),
+                        SessionCard(
+                          sessionNumber: 5,
+                          isDone: false,
+                          pressCallback: () {},
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Meditation',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                    ),
+                    Container(
+                      height: 90,
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
                       ),
-                      SessionCard(
-                        sessionNumber: 3,
-                        isDone: false,
-                        pressCallback: () {},
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(13),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(0, 17),
+                            blurRadius: 23,
+                            spreadRadius: -13,
+                            color: kShadowColor,
+                          )
+                        ],
                       ),
-                      SessionCard(
-                        sessionNumber: 4,
-                        isDone: false,
-                        pressCallback: () {},
+                      child: Row(
+                        children: <Widget>[
+                          SvgPicture.asset(
+                            'assets/icons/Meditation_women_small.svg',
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text(
+                                  'Basic 2',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1
+                                      ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                ),
+                                Text(
+                                  'Mulai memperdalam latihan meditasi anda',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Padding(padding: EdgeInsets.all(10))
+                        ],
                       ),
-                      SessionCard(
-                        sessionNumber: 5,
-                        isDone: false,
-                        pressCallback: () {},
-                      ),
-                    ],
-                  )
-                ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
               ),
             ),
           )
@@ -149,7 +223,7 @@ class SessionCard extends StatelessWidget {
                 pressCallback();
               },
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(14.0),
                 child: Row(children: <Widget>[
                   Container(
                     height: 42,
