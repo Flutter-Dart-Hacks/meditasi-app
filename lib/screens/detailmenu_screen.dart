@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meditasi_app/constants.dart';
+import 'package:meditasi_app/widgets/bottom_navbars.dart';
 import 'package:meditasi_app/widgets/searchbar.dart';
 
 class DetailMenuScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class _DetailMenuScreenState extends State<DetailMenuScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: const BottomNavbars(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -166,7 +168,13 @@ class _DetailMenuScreenState extends State<DetailMenuScreen> {
                               ],
                             ),
                           ),
-                          const Padding(padding: EdgeInsets.all(10))
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: SvgPicture.asset(
+                              'assets/icons/lock.svg',
+                              fit: BoxFit.cover,
+                            ),
+                          )
                         ],
                       ),
                     ),
