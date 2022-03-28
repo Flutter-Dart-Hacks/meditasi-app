@@ -17,5 +17,7 @@
     </style>
 
     <color name="hijau">#4CAF50</color>
+    <color name="ungu_latar">#B39DDB</color>
+    <color name="ungu">#7E57C2</color>
 
 </resources>
